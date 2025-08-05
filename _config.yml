@@ -95,35 +95,46 @@ content:
         quote: >
           进入智能阅读时代，享受批阅奏折乐趣
         description: |
-          「帝阅」是一款个人专属知识管理与创造的 AI Native 产品为用户打造一位专属的侍读助理，帮助用户提升获取知识效率和发挥创造力让用户更好地去积累知识、管理知识、运用知识.
+          「帝阅」是一款个人专属知识管理与创造的 AI Native 产品为用户打造一位专属的侍读助理，帮助用户提升获取知识效率和发挥创造力让用户更好地去积累知识、管理知识、运用知识。
 
   - title: Experience # Title for the section
     layout: list # Type of content section (list/text)
     content:
       - layout: left
-        title: The Boring Company
-        link: boringcompany.com
+        title: 新奥集团-嗯噢哇
+        link: https://www.enowa.cn
         # link_text: boringcompany.com
-        sub_title: Senior Network System Administrator
-        caption: November 2017 - Present
+        sub_title: 产品经理
+        caption: 2022 - 至今
         quote: >
-          Solving 21st century problems by diging holes and making game changing products like the *not a flamethrower*
+          基于新绎旅游场景,构建哇途文旅智能模型Waa-GPT,重构需供链接与服务模式推动产业智能化升级
         description: | # this will include new lines to allow paragraphs
-          Every company needs its networks properly administered and The Boring Compay is no exception. Digging holes is hard and I play my part making sure the whole company stays connected. I lead a team of 5 people and enjoy driving the company to try new technologies.
+          作为产品经理，主要负责北海国际客运港及涠洲岛相关企业智能产品（旅游智伴、经营智伴和平台产品）设计，主导推动相关产品的研发、测试、部署和维护。
+          产品每年服务超200万游客和各生态商家
+      - layout: left
+        title: 深信服
+        link: https://www.sangfor.com.cn/
+        # link_text: boringcompany.com
+        sub_title: 研发工程师 ｜ 产品经理
+        caption: 2018 - 2022
+        quote: >
+          致力于承载各行业用户数字化、智能化转型过程中的基石性工作，从而让每个用户的数字化更简单、更安全。
+        description: | # this will include new lines to allow paragraphs
+          作为研发工程师,负责安全组网产品SDWAN智能路由器4.0系列版本、安全服务Central云图产品的后台架构实现  
+          作为产品经理，负责产品的需求分析、设计和文档编写   
+          产品发货超3W+，服务京东、顺丰、联华超市、 工商银行等企业客户
 
   - title: Education # Title for the section
     layout: list # Type of content section (list/text)
     content:
       - layout: left
-        title: Harvard University
-        caption: 2010 - 2013
-        sub_title: BSc Computer Science
+        title: 杭州电子科技大学
+        caption: 2013 - 2017
+        sub_title: 电子信息工程
         quote: >
-          Established in 1636, Harvard is the oldest higher education institution in the United States, and is widely regarded in terms of its influence, reputation, and academic pedigree as a leading university in not just the US but also the world.
+          学校始创于1956年, 浙江省高水平大学建设高校 - "团结勤奋、求实创新”的优良传统，弘扬“笃学力行、守正求新”
         description: | # this will include new lines to allow paragraphs
-          During my time at Harvard I learnt most of my key skills that have I have taken through my career such as teamwork and working to tight deadlines. I thouroughly enjoyed my time as university and learnt a lot about a healthy work life balance.
-
-          I spent a lot of my free time as a committee member of the *Harvard Mountaineering Club* taking on roles such as *Trip Secretary* and *Vice-President*.
+          我在杭州电子科技大学电子信息工程专业学习，专业课程包括数据结构、数据库原理、计算机网络、操作系统、软件工程等。
 
   - title: A Little More About Me
     layout: text
@@ -133,9 +144,6 @@ content:
       - Gaming
       - Knitting
       - [Becoming a ninja](https://www.youtube.com/watch?v=vtg4o__aRMg)
-
-      Look at this cool image  
-      ![Trees](/modern-resume-theme/images/landscape-trees.jpg "Trees")
 
 # Footer
 footer_show_references: true
