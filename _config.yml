@@ -32,11 +32,11 @@ linkedin_username: CyberFD
 # Additional icon links
 additional_links:
   - title: 微信
-    icon: fab fa-wexin
+    icon: fab fa-weixin
     url: http://cdn.oyster-iot.cloud/202505231802103.png
-  - title: 稀土掘金
-    icon: fab fa-feed
-    url: Link url (eg. https://google.com)
+  - title: 知乎
+    icon: fab fa-zhihu
+    url: https://www.zhihu.com/people/baird-66
 
 # Google Analytics and Tag Manager
 # Using more than one of these may cause issues with reporting
