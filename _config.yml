@@ -110,7 +110,7 @@ content:
           基于新绎旅游场景,构建哇途文旅智能模型Waa-GPT,重构需供链接与服务模式推动产业智能化升级
         description: | # this will include new lines to allow paragraphs
           作为产品经理，主要负责北海国际客运港及涠洲岛相关企业智能产品（旅游智伴、经营智伴和平台产品）设计，主导推动相关产品的研发、测试、部署和维护。  
-          产品每年服务超220万游客和各生态商家
+          产品每年服务超220万+游客和500+生态商家
       - layout: left
         title: 深信服
         link: https://www.sangfor.com.cn/
@@ -122,7 +122,7 @@ content:
         description: | # this will include new lines to allow paragraphs
           作为研发工程师,负责安全组网产品SDWAN智能路由器4.0系列版本、安全服务Central云图产品的后台架构实现  
           作为产品经理，负责产品的需求分析、设计和文档编写   
-          产品发货超3W+，服务京东、顺丰、联华超市、 工商银行等企业客户
+          产品发货超3万+，服务京东、顺丰、联华超市、 工商银行等企业客户
 
   - title: Education # Title for the section
     layout: list # Type of content section (list/text)
