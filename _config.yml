@@ -139,7 +139,7 @@ content:
   - title: A Little More About Me
     layout: text
     content: | # this will include new lines to allow paragraphs
-      除了AI和代码之外，还有一些其他的兴趣爱好：
+      除了AI和代码之外，我还有一些其他的兴趣爱好：
       - 🏀 篮球 三分很准
       - 📖 阅读 阳明心学 ｜ 科技人文
       - 🎮 游戏 Stream｜PS5｜Switch
