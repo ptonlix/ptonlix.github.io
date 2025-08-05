@@ -50,7 +50,7 @@ about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
   我叫陈富东  
   一个AI产品经理: 专注于AI Agent流程管理 ｜ 知识库管理和创造   
-  一个软件开发者: 信仰开源，为世界贡献自己的代码  
+  一个软件开发者: 信仰开源，为世界贡献自己的代码, 留下自己的足迹  
   一个创业者: 用产品灵感引导业务创新，用技术驱动灵感落地发展  
   ⚡️ 作品: <mark>GoHumanLoop</mark> | <mark>帝阅DRead开源系列</mark>
 
@@ -69,10 +69,33 @@ content:
           - title: ptonlix/gohumanloop-examples
             icon: fab fa-github
             url: github.com/ptonlix/gohumanloop-examples
+          - title: ptonlix/gohumanloop-wework
+            icon: fab fa-github
+            url: github.com/ptonlix/gohumanloop-wework
+          - title: ptonlix/gohumanloop-feishu
+            icon: fab fa-github
+            url: github.com/ptonlix/gohumanloop-feishu
         quote: >
           💯 Perfecting AI workflows with human intelligence
         description: | # this will include new lines to allow paragraphs
           GoHumanLoop：是一个Python库，使AI Agent能够在关键阶段动态请求人类输入（批准/反馈/对话）。我做这个项目是为了让AI Agent与人更好协同工作，确保Agent始终与人类对齐，提供更安全、更可靠的AI服务。
+      - layout: top-middle
+        title: 帝阅DeepRead
+        link: https://dread.run/
+        additional_links:
+          - title: 产品介绍
+            icon: fab fa-stack-overflow
+            url: https://uafzaub8s8.feishu.cn/wiki/RP0Swx7RtiFn8ekZ93xcaC2VnJb
+          - title: LangChain-SearXNG
+            icon: fab fa-github
+            url: https://github.com/ptonlix/LangChain-SearXNG
+          - title: LangChain-Emoji
+            icon: fab fa-github
+            url: https://github.com/ptonlix/LangChain-Emoji
+        quote: >
+          进入智能阅读时代，享受批阅奏折乐趣
+        description: |
+          「帝阅」是一款个人专属知识管理与创造的 AI Native 产品为用户打造一位专属的侍读助理，帮助用户提升获取知识效率和发挥创造力让用户更好地去积累知识、管理知识、运用知识.
 
   - title: Experience # Title for the section
     layout: list # Type of content section (list/text)
