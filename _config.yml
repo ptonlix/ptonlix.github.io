@@ -7,7 +7,7 @@ version: 2
 
 # Personal info
 name: 陈富东
-title: AI产品经理｜开发者｜创业者
+title: 🚀 AI产品经理｜开发者｜创业者
 email: baird0917@163.com
 website: https://github.com/ptonlix
 
@@ -31,12 +31,12 @@ linkedin_username: CyberFD
 
 # Additional icon links
 additional_links:
-  - title: weixin
+  - title: 微信
     icon: fab fa-wexin
     url: http://cdn.oyster-iot.cloud/202505231802103.png
-# - title: another link
-#   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&m=free)
-#   url: Link url (eg. https://google.com)
+  - title: 稀土掘金
+    icon: fab fa-feed
+    url: Link url (eg. https://google.com)
 
 # Google Analytics and Tag Manager
 # Using more than one of these may cause issues with reporting
