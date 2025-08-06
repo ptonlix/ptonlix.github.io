@@ -102,7 +102,7 @@ content:
     layout: list # Type of content section (list/text)
     content:
       - layout: left
-        title: 新奥集团-嗯噢哇
+        title: 新奥集团-新绎
         link: https://www.enowa.cn
         # link_text: boringcompany.com
         sub_title: 产品经理
