@@ -78,7 +78,7 @@ content:
         quote: >
           💯 Perfecting AI workflows with human intelligence
         description: | # this will include new lines to allow paragraphs
-          GoHumanLoop：是一个Python库，使AI Agent能够在关键阶段动态请求人类输入（批准/反馈/对话）。我做这个项目是为了让AI Agent与人更好协同工作，确保Agent始终与人类对齐，提供更安全、更可靠的AI服务。
+          「GoHumanLoop」是一个Python库，使AI Agent能够在关键阶段动态请求人类输入（批准/反馈/对话）。我做这个项目是为了让AI Agent与人更好协同工作，确保Agent始终与人类对齐，提供更安全、更可靠的AI服务。
       - layout: top-middle
         title: 帝阅DeepRead
         link: https://dread.run/
