@@ -1,0 +1,161 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  tags: string[];
+  repo?: string;
+  role?: string;
+  links: Array<{ text: string; url: string }>;
+  stars?: number;
+}
+
+const { name, description, tags, repo, role, links, stars } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="project-header">
+    <h3 class="project-title mono">
+      <span class="project-symbol">&gt;</span>
+      {name}
+    </h3>
+    {role && <span class="project-role">{role}</span>}
+    {stars !== undefined && (
+      <div class="project-stars">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+        <span>{stars}</span>
+      </div>
+    )}
+  </div>
+  
+  <p class="project-description">{description}</p>
+  
+  <div class="project-tags">
+    {tags.map((tag) => (
+      <span class="tag">{tag}</span>
+    ))}
+  </div>
+  
+  <div class="project-links">
+    {links.map((link) => (
+      <a href={link.url} target="_blank" rel="noopener noreferrer" class="project-link">
+        {link.text}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+        </svg>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .project-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  
+  .project-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.2);
+  }
+  
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  
+  .project-symbol {
+    color: var(--primary);
+    margin-right: 0.25rem;
+  }
+  
+  .project-role {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .project-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--warning);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-left: auto;
+  }
+  
+  .project-description {
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tag {
+    background: var(--bg-elevated);
+    color: var(--primary);
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+  }
+  
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  
+  .project-link:hover {
+    color: var(--accent);
+  }
+  
+  @media (max-width: 768px) {
+    .project-card {
+      padding: 1.25rem;
+    }
+    
+    .project-title {
+      font-size: 1.125rem;
+    }
+    
+    .project-stars {
+      margin-left: 0;
+    }
+  }
+</style>

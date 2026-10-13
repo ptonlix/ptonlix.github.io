@@ -1,0 +1,293 @@
+---
+import { siteConfig, about } from '@/config';
+---
+
+<section class="hero" id="about">
+  <div class="container">
+    <div class="hero-content">
+      <div class="avatar-container">
+        <img src="/profile.jpg" alt={siteConfig.name} class="avatar" />
+        <div class="status-indicator"></div>
+      </div>
+      
+      <div class="hero-text">
+        <h1 class="hero-title mono">
+          <span class="prompt">{about.greeting}</span>
+        </h1>
+        
+        <p class="hero-tagline">{siteConfig.tagline}</p>
+        
+        <div class="hero-highlights">
+          {about.highlights.map((highlight) => (
+            <div class="highlight-item">
+              <span class="bullet">▸</span>
+              <span>{highlight}</span>
+            </div>
+          ))}
+        </div>
+        
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary glow">
+            <span class="mono">&gt; 查看作品</span>
+          </a>
+          <a href={`https://github.com/${siteConfig.github}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="terminal-decoration mono">
+      <div class="terminal-header">
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+        <span class="terminal-title">agent_control_plane.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt-symbol">$</span> ./init_workflow.sh
+        </div>
+        <div class="terminal-line">
+          <span class="text-dim">Building AI-native products...</span>
+        </div>
+        <div class="terminal-line">
+          <span class="text-success">✓</span> Agent control plane ready
+        </div>
+        <div class="terminal-line">
+          <span class="text-success">✓</span> Human-in-the-loop enabled
+        </div>
+        <div class="terminal-line">
+          <span class="prompt-symbol">$</span> <span class="cursor-blink">_</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 4rem 0;
+    position: relative;
+  }
+  
+  .hero-content {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  
+  .avatar-container {
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+    object-fit: cover;
+  }
+  
+  .status-indicator {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+  }
+  
+  .hero-text {
+    flex: 1;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .hero-tagline {
+    font-size: 1.25rem;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .hero-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: var(--text-dim);
+  }
+  
+  .bullet {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: var(--bg);
+    border-color: var(--primary);
+  }
+  
+  .btn-primary:hover {
+    background: var(--primary-dim);
+    border-color: var(--primary-dim);
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-bright);
+  }
+  
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  
+  .terminal-decoration {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .terminal-header {
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border-bright);
+  }
+  
+  .terminal-dot:nth-child(1) { background: #ff5f56; }
+  .terminal-dot:nth-child(2) { background: #ffbd2e; }
+  .terminal-dot:nth-child(3) { background: #27c93f; }
+  
+  .terminal-title {
+    margin-left: auto;
+    color: var(--text-dim);
+    font-size: 0.875rem;
+  }
+  
+  .terminal-body {
+    padding: 1.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+  
+  .terminal-line {
+    color: var(--text);
+  }
+  
+  .prompt-symbol {
+    color: var(--primary);
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+  
+  .text-dim {
+    color: var(--text-dim);
+  }
+  
+  .text-success {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  
+  .cursor-blink {
+    color: var(--primary);
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem 0;
+    }
+    
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    
+    .avatar {
+      width: 140px;
+      height: 140px;
+    }
+    
+    .hero-title {
+      font-size: 1.5rem;
+    }
+    
+    .hero-tagline {
+      font-size: 1rem;
+    }
+    
+    .hero-cta {
+      justify-content: center;
+    }
+    
+    .terminal-body {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
