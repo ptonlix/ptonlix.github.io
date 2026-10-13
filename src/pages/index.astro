@@ -1,0 +1,629 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { 
+  siteConfig, 
+  featuredProjects, 
+  archivedProjects,
+  experience,
+  education,
+  techStack,
+  interests 
+} from '@/config';
+
+// Fetch GitHub stars for repos at build time
+const projectsWithStars = await Promise.all(
+  featuredProjects.map(async (project) => {
+    if (!project.repo) return project;
+    
+    try {
+      const response = await fetch(`https://api.github.com/repos/${project.repo}`, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        return { ...project, stars: data.stargazers_count };
+      }
+    } catch (error) {
+      console.warn(`Failed to fetch stars for ${project.repo}:`, error);
+    }
+    
+    return project;
+  })
+);
+
+const archivedWithStars = await Promise.all(
+  archivedProjects.map(async (project) => {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${project.repo}`, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        return { ...project, stars: data.stargazers_count };
+      }
+    } catch (error) {
+      console.warn(`Failed to fetch stars for ${project.repo}:`, error);
+    }
+    
+    return project;
+  })
+);
+---
+
+<Layout title={`${siteConfig.name} - ${siteConfig.title}`}>
+  <Header />
+  
+  <main>
+    <Hero />
+    
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title mono">
+          <span class="prompt">&gt; 作品集</span>
+        </h2>
+        
+        <div class="projects-grid">
+          {projectsWithStars.map((project) => (
+            <ProjectCard {...project} />
+          ))}
+        </div>
+        
+        <div class="archived-section">
+          <h3 class="subsection-title mono">
+            <span class="prompt-small">&gt;&gt;</span> 归档项目
+          </h3>
+          <div class="archived-grid">
+            {archivedWithStars.map((project) => (
+              <a 
+                href={`https://github.com/${project.repo}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="archived-item"
+              >
+                <span class="archived-name">{project.name}</span>
+                {project.stars !== undefined && (
+                  <span class="archived-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    {project.stars}
+                  </span>
+                )}
+                <span class="archived-desc">{project.description}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Experience -->
+    <section class="section section-alt" id="experience">
+      <div class="container">
+        <h2 class="section-title mono">
+          <span class="prompt">&gt; 工作经历</span>
+        </h2>
+        
+        <div class="timeline">
+          {experience.map((exp, index) => (
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <h3 class="timeline-title">
+                    <a href={exp.url} target="_blank" rel="noopener noreferrer">
+                      {exp.company}
+                    </a>
+                  </h3>
+                  <span class="timeline-period mono">{exp.period}</span>
+                </div>
+                <p class="timeline-position">{exp.position}</p>
+                <p class="timeline-description">{exp.description}</p>
+              </div>
+            </div>
+          ))}
+          
+          <!-- Education -->
+          <div class="timeline-item">
+            <div class="timeline-marker education-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-title">{education.school}</h3>
+                <span class="timeline-period mono">{education.period}</span>
+              </div>
+              <p class="timeline-position">{education.degree}</p>
+              <p class="timeline-description">{education.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Tech Stack & Interests -->
+    <section class="section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-card">
+            <h2 class="section-title mono">
+              <span class="prompt">&gt; 技术栈</span>
+            </h2>
+            <div class="tech-groups">
+              <div class="tech-group">
+                <h4 class="tech-group-title">AI & Agents</h4>
+                <div class="tech-tags">
+                  {techStack.ai.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="tech-group">
+                <h4 class="tech-group-title">编程语言</h4>
+                <div class="tech-tags">
+                  {techStack.languages.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="tech-group">
+                <h4 class="tech-group-title">运行时 & 工具</h4>
+                <div class="tech-tags">
+                  {techStack.runtime.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="about-card">
+            <h2 class="section-title mono">
+              <span class="prompt">&gt; 兴趣爱好</span>
+            </h2>
+            <div class="interests-list">
+              {interests.map((interest) => (
+                <div class="interest-item">
+                  <span class="bullet">▸</span>
+                  <span>{interest}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <h2 class="section-title mono">
+          <span class="prompt">&gt; 联系方式</span>
+        </h2>
+        
+        <div class="contact-grid">
+          <a href={`mailto:${siteConfig.email}`} class="contact-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>Email</span>
+            <span class="contact-value">{siteConfig.email}</span>
+          </a>
+          
+          <a href={`https://github.com/${siteConfig.github}`} target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+            <span class="contact-value">@{siteConfig.github}</span>
+          </a>
+          
+          <a href={`https://twitter.com/${siteConfig.twitter}`} target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>X / Twitter</span>
+            <span class="contact-value">@{siteConfig.twitter}</span>
+          </a>
+          
+          <a href={`https://www.zhihu.com/people/${siteConfig.zhihu}`} target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.672.85-1.434.850-2.11zm-.886 3.74c-.456 1.116-.957 2.156-1.522 3.118v5.05h3.278v3.386h-3.278v1.748h3.278v1.86H9.587V16.76H6.31v-1.748h3.278v-3.386H6.31v-5.05c-.565-.962-1.066-2.002-1.522-3.118zm12.217 2.156c-.456 1.116-.957 2.156-1.522 3.118v5.05h3.278v3.386h-3.278v1.748h3.278v1.86h-3.278V16.76h-3.278v-1.748h3.278v-3.386h-3.278v-5.05c-.565-.962-1.066-2.002-1.522-3.118z"/>
+            </svg>
+            <span>知乎</span>
+            <span class="contact-value">{siteConfig.zhihu}</span>
+          </a>
+          
+          <div class="contact-card wechat-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-5.523 2.759-7.253-2.206-2.52-5.92-4.379-10.57-4.379zm13.31 6.379c-4.562 0-8.263 2.606-8.263 5.82 0 3.213 3.701 5.82 8.263 5.82.468 0 .93-.028 1.382-.082a.805.805 0 0 1 .636.088l1.48.87a.29.29 0 0 0 .148.047c.144 0 .26-.117.26-.26a.238.238 0 0 0-.042-.188l-.31-1.177a.52.52 0 0 1 .189-.59c1.577-1.177 2.59-2.8 2.59-4.63 0-3.214-3.7-5.82-8.263-5.82z"/>
+            </svg>
+            <span>微信</span>
+            <span class="contact-value">扫码添加</span>
+            <div class="wechat-qr">
+              <img src="/wechat-qr.png" alt="WeChat QR Code" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content mono">
+        <p>&copy; 2026 {siteConfig.name}. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.</p>
+        <p class="footer-links">
+          <a href="https://github.com/ptonlix/ptonlix.github.io" target="_blank" rel="noopener noreferrer">
+            View Source
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  main {
+    min-height: 100vh;
+  }
+  
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .section-alt {
+    background: var(--bg-elevated);
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  
+  .subsection-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-dim);
+  }
+  
+  .prompt-small {
+    color: var(--primary);
+    margin-right: 0.5rem;
+  }
+  
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .archived-section {
+    margin-top: 3rem;
+  }
+  
+  .archived-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .archived-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .archived-item:hover {
+    border-color: var(--primary);
+    transform: translateX(4px);
+  }
+  
+  .archived-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+  
+  .archived-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--warning);
+    font-size: 0.875rem;
+  }
+  
+  .archived-desc {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: -2.4375rem;
+    top: 0.375rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--bg-elevated);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .education-marker {
+    background: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  
+  .timeline-content {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+  
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .timeline-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  
+  .timeline-title a {
+    color: var(--text);
+  }
+  
+  .timeline-title a:hover {
+    color: var(--primary);
+  }
+  
+  .timeline-period {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  .timeline-position {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  .timeline-description {
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  
+  /* About Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+  
+  .about-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+  }
+  
+  .tech-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .tech-group-title {
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tech-tag {
+    background: var(--bg-elevated);
+    color: var(--primary);
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+  }
+  
+  .interests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .interest-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 1.0625rem;
+  }
+  
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .contact-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 1.5rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  
+  .contact-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 255, 65, 0.2);
+  }
+  
+  .contact-card svg {
+    color: var(--primary);
+  }
+  
+  .contact-card > span:nth-child(2) {
+    font-weight: 600;
+    color: var(--text);
+  }
+  
+  .contact-value {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+  }
+  
+  .wechat-card {
+    cursor: default;
+  }
+  
+  .wechat-qr {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: var(--bg-card);
+    border: 2px solid var(--primary);
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  .wechat-card:hover .wechat-qr {
+    display: block;
+  }
+  
+  .wechat-qr img {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+  
+  /* Footer */
+  .footer {
+    background: var(--bg-elevated);
+    border-top: 2px solid var(--border);
+    padding: 2rem 0;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--text-dim);
+    font-size: 0.875rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-links a {
+    color: var(--text-dim);
+  }
+  
+  .footer-links a:hover {
+    color: var(--primary);
+  }
+  
+  @media (max-width: 768px) {
+    .section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .timeline {
+      padding-left: 1.5rem;
+    }
+    
+    .timeline-marker {
+      left: -1.9375rem;
+    }
+    
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,6 +1,28 @@
-*.gem
-.bundle
-.sass-cache
-_site
-*.code-workspace
-vendor
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Generated files
+.DS_Store
+
+# Environment
+.env
+.env.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+npm-debug.log*

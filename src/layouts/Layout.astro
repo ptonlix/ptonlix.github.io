@@ -1,0 +1,79 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'AI 产品经理 · 开发者 · 创业者 | 构建能进入真实工作流的 AI Agent 产品' } = Astro.props;
+const siteUrl = 'https://ptonlix.github.io';
+const ogImage = `${siteUrl}/og-image.png`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={siteUrl} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="陈富东 / CyberFD" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@Baird_cfd" />
+    
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Theme toggle
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      };
+
+      const setTheme = (theme: string) => {
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+        localStorage.setItem('theme', theme);
+      };
+
+      // Initialize theme
+      setTheme(getTheme());
+
+      // Listen for theme toggle
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.id === 'theme-toggle') {
+          const currentTheme = getTheme();
+          setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+      });
+    </script>
+  </body>
+</html>
